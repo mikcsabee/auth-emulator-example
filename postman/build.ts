@@ -2,7 +2,7 @@ const fs = require("fs");
 const {exec} = require("child_process");
 const template = require("./PostmanCollection.template.json");
 
-const compiledPreRequestScript = "dist/postman_pre-request_script.js";
+const compiledPreRequestScript = "dist/pre-request_script.js";
 const collectionOutput = "../PostmanCollection.json";
 
 /**
