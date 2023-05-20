@@ -10,16 +10,27 @@ on:
       - 'feat/**'
 
 jobs:
-  lint:
+  lint-functions:
     runs-on: ubuntu-latest
-    name: lint
+    name: Lint Functions
     steps:
       - uses: actions/checkout@v3
-      - name: Lint functions
-        run: |
-          cd functions
-          npm install
-          npm run lint
-      - name: Lint packages
-        run: |
-          pwd
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: functions/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+  lint-postman:
+    runs-on: ubuntu-latest
+    name: Lint Postman
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: postman/package-lock.json
+      - run: npm ci
+      - run: npm run lint  
