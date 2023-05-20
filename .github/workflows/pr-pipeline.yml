@@ -18,6 +18,7 @@ jobs:
       - name: Lint functions
         run: |
           cd functions
+          npm install
           npm run lint
       - name: Lint packages
         run: |
