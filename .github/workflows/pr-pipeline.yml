@@ -41,27 +41,7 @@ jobs:
           firebase emulators:start &
       - run: |
           echo "Wait for Firebase Emulator"
-          wait() {
-            TRIES=1
-            READY=false
-            while ["$READY" != "true"];
-            do
-              PROJECT_ID=$(curl -sk 'http://localhost:4000/api/config' jq -r .projectId)
-              if ["$PROJECT_ID" = "auth-emulator-example"]; then
-                echo "Firebase Emulator is ready"
-                READY=true
-              else
-                echo "Wait..."
-                sleep 10
-                ((TRIES=TRIES+1))
-              fi
-              if [ "$TRIES" -qt 30 ]; then
-                echo "Firebase Emulator is not ready"
-                exit 1
-              fi
-            done
-          }
-          wait
+          node postman/wait.js
       - run: |
           echo "Test"
           cd postman

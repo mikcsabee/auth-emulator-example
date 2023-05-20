@@ -96,7 +96,7 @@ async function main() {
   const content = getPreScriptByLine();
   overwritePreScript(content);
   createCollection(content);
-  generateFakeServiceAccount();
+  await generateFakeServiceAccount();
 }
 
 main().then(() => console.log("Build successful!"));
