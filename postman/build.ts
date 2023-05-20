@@ -1,9 +1,11 @@
 const fs = require("fs");
 const {exec} = require("child_process");
 const template = require("./PostmanCollection.template.json");
+const {generateKeyPairSync} = require("crypto");
 
 const compiledPreRequestScript = "dist/pre-request_script.js";
 const collectionOutput = "../PostmanCollection.json";
+const serviceKeyOutput = "../functions/serviceAccountKey.json";
 
 /**
  * compiles the postman_pre-request_script.ts using exec
@@ -61,6 +63,30 @@ function createCollection(content: string[]): void {
 }
 
 /**
+ * This method generates a fake serviceAccountKey to the functions folder
+ */
+async function generateFakeServiceAccount() {
+  const privateKey: string = generateKeyPairSync("rsa", {
+    modulusLength: 512,
+    publicKeyEncoding: {
+      type: "spki",
+      format: "pem",
+    },
+    privateKeyEncoding: {
+      type: "pkcs8",
+      format: "pem",
+    },
+  }).privateKey;
+
+  const serviceAccount = {
+    "project_id": "auth-emulator-example",
+    "client_email": "test@test.com",
+    "private_key": privateKey,
+  };
+  fs.writeFileSync(serviceKeyOutput, JSON.stringify(serviceAccount, null, 2));
+}
+
+/**
  * Main entry point
  */
 async function main() {
@@ -68,6 +94,7 @@ async function main() {
   const content = getPreScriptByLine();
   overwritePreScript(content);
   createCollection(content);
+  await generateFakeServiceAccount();
 }
 
 main().then(() => console.log("Build successful!"));
