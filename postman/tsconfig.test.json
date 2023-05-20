@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "target": "esnext"
+  },
+  "compileOnSave": true
+}

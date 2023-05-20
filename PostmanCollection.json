@@ -1,143 +1,138 @@
 {
-	"info": {
-		"_postman_id": "1e19943c-d29a-469c-88bd-435a78408cd6",
-		"name": "Auth Emulator Example",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "HelloWorld",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:5001/auth-emulator-example/us-central1/helloWorld",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5001",
-					"path": [
-						"auth-emulator-example",
-						"us-central1",
-						"helloWorld"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "{{token}}",
-				"type": "string"
-			}
-		]
-	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					"const apiKey = pm.collectionVariables.get(\"apiKey\");",
-					"",
-					"function randomProviderRawId() {",
-					"    let str = \"\";",
-					"    for (let i = 0; i < 40; i++) {",
-					"       str += Math.floor(Math.random() * 10).toString();",
-					"    }",
-					"    return str;",
-					"}",
-					"",
-					"const claims = encodeURIComponent(JSON.stringify({",
-					"    sub: randomProviderRawId(),",
-					"    iss: \"\",",
-					"    aud: \"\",",
-					"    exp: 0,",
-					"    iat: 0,",
-					"    name: pm.collectionVariables.get(\"authName\"),",
-					"    email: pm.collectionVariables.get(\"authEmail\"),",
-					"    email_verified: true,",
-					"    picture: \"\",",
-					"}));",
-					"",
-					"const payload = JSON.stringify({",
-					"    requestUri: `http://localhost:9099/emulator/auth/handler?providerId=google.com&id_token=${claims}`,",
-					"    returnIdpCredential: true,",
-					"    returnSecureToken: true,",
-					"    sessionId: \"ValueNotUsedByAuthEmulator\",",
-					"});",
-					"",
-					"const options = {",
-					"    url: `http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${apiKey}`,",
-					"    method: 'POST',",
-					"    header: { 'content-type': 'application/json' },",
-					"    body: {",
-					"        mode: 'raw',",
-					"        raw: payload",
-					"    }",
-					"};",
-					"",
-					"pm.sendRequest(options, function (err, res) {",
-					"    if (err) {",
-					"        console.error(err)",
-					"        throw new Error(\"Unable to authenticate!\");",
-					"    }",
-					"    else {",
-					"        pm.collectionVariables.set(\"token\", res.json().idToken);",
-					"    }",
-					"});",
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "token",
-			"value": "",
-			"type": "default"
-		},
-		{
-			"key": "authEmail",
-			"value": "hello@test.com",
-			"type": "default"
-		},
-		{
-			"key": "authName",
-			"value": "Test User",
-			"type": "default"
-		},
-		{
-			"key": "apiKey",
-			"value": "replace_me_with_api_key",
-			"type": "default"
-		}
-	]
+  "info": {
+    "_postman_id": "1e19943c-d29a-469c-88bd-435a78408cd6",
+    "name": "Auth Emulator Example",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "HelloWorld",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:5001/auth-emulator-example/us-central1/helloWorld",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5001",
+          "path": [
+            "auth-emulator-example",
+            "us-central1",
+            "helloWorld"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const apiKey = pm.collectionVariables.get(\"apiKey\");",
+          "function randomProviderRawId() {",
+          "    let str = \"\";",
+          "    for (let i = 0; i < 40; i++) {",
+          "        str += Math.floor(Math.random() * 10).toString();",
+          "    }",
+          "    return str;",
+          "}",
+          "const claims = encodeURIComponent(JSON.stringify({",
+          "    sub: randomProviderRawId(),",
+          "    iss: \"\",",
+          "    aud: \"\",",
+          "    exp: 0,",
+          "    iat: 0,",
+          "    name: pm.collectionVariables.get(\"authName\"),",
+          "    email: pm.collectionVariables.get(\"authEmail\"),",
+          "    email_verified: true,",
+          "    picture: \"\",",
+          "}));",
+          "const payload = JSON.stringify({",
+          "    requestUri: `http://localhost:9099/emulator/auth/handler?providerId=google.com&id_token=${claims}`,",
+          "    returnIdpCredential: true,",
+          "    returnSecureToken: true,",
+          "    sessionId: \"ValueNotUsedByAuthEmulator\",",
+          "});",
+          "const options = {",
+          "    url: `http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${apiKey}`,",
+          "    method: \"POST\",",
+          "    header: { \"content-type\": \"application/json\" },",
+          "    body: {",
+          "        mode: \"raw\",",
+          "        raw: payload,",
+          "    },",
+          "};",
+          "pm.sendRequest(options, function (err, res) {",
+          "    if (err) {",
+          "        console.error(err);",
+          "        throw new Error(\"Unable to authenticate!\");",
+          "    }",
+          "    else {",
+          "        pm.collectionVariables.set(\"token\", res.json().idToken);",
+          "    }",
+          "});",
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "authEmail",
+      "value": "hello@test.com",
+      "type": "default"
+    },
+    {
+      "key": "authName",
+      "value": "Test User",
+      "type": "default"
+    },
+    {
+      "key": "apiKey",
+      "value": "replace_me_with_api_key",
+      "type": "default"
+    }
+  ]
 }

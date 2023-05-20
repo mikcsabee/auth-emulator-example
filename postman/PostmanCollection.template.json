@@ -1,0 +1,82 @@
+{
+  "info": {
+    "_postman_id": "1e19943c-d29a-469c-88bd-435a78408cd6",
+    "name": "Auth Emulator Example",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "HelloWorld",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:5001/auth-emulator-example/us-central1/helloWorld",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "5001",
+          "path": ["auth-emulator-example", "us-central1", "helloWorld"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": []
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "authEmail",
+      "value": "hello@test.com",
+      "type": "default"
+    },
+    {
+      "key": "authName",
+      "value": "Test User",
+      "type": "default"
+    },
+    {
+      "key": "apiKey",
+      "value": "replace_me_with_api_key",
+      "type": "default"
+    }
+  ]
+}
