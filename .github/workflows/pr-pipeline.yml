@@ -48,6 +48,7 @@ jobs:
             do
               PROJECT_ID=$(curl -sk 'http://localhost:4000/api/config' jq -r .projectId)
               if ["$PROJECT_ID" = "auth-emulator-example"]; then
+                echo "Firebase Emulator is ready"
                 READY=true
               else
                 echo "Wait..."
@@ -63,6 +64,8 @@ jobs:
           wait
       - run: |
           echo "Test"
+          cd postman
+          npm run test
 
 # jobs:
 #   lint-functions:
