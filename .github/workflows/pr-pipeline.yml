@@ -59,7 +59,7 @@ jobs:
   build-postman:
     runs-on: ubuntu-latest
     name: Build Postman
-    needs: list-postman
+    needs: lint-postman
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
