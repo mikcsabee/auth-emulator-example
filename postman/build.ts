@@ -97,4 +97,6 @@ async function main() {
   await generateFakeServiceAccount();
 }
 
-main().then(() => console.log("Build successful!"));
+main()
+  .then(() => console.log("Build successful!"))
+  .catch((error: Error) => console.error(error));

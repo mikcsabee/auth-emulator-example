@@ -14,7 +14,11 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: ["tsconfig.postman.json", "tsconfig.test.json"],
+    project: [
+      "tsconfig.dev.json",
+      "tsconfig.postman.json",
+      "tsconfig.test.json",
+    ],
     sourceType: "module",
   },
   ignorePatterns: [
@@ -22,9 +26,9 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {
-    quotes: ["error", "double"],
+    "quotes": ["error", "double"],
     "import/no-unresolved": 0,
-    indent: ["error", 2],
+    "indent": ["error", 2],
     "@typescript-eslint/no-var-requires": "off",
   },
 };

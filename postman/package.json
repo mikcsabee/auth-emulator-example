@@ -4,8 +4,8 @@
   "description": "Tests for the postman_pre-request_script.js",
   "main": "postman_pre-request_script.js",
   "scripts": {
-    "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint --fix --ext .ts .",
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "eslint --fix --ext .js,.ts .",
     "build": "ts-node build.ts",
     "test": "jest"
   },

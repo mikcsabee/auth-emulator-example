@@ -16,7 +16,7 @@ const helloWorld = functions.https.onRequest(async (request, response) => {
 
   try {
     const decodedToken = await app.auth().verifyIdToken(token, true);
-    response.send(decodedToken);
+    response.json(decodedToken);
   } catch (e) {
     throw new Error("Invalid Bearer token!");
   }
