@@ -98,3 +98,5 @@ async function main() {
 }
 
 main().then(() => console.log("Build successful!"));
+
+const test_linter = 3;
