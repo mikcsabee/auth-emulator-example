@@ -32,7 +32,13 @@ jobs:
       - run: |
           echo "Build Postman"
           cd postman
-          npm run test
+          npm run build
+      - run: |
+          echo "Install Firebase"
+          npm install -g firebase-tools
+      - run: |
+          echo "Start Firebase Emulator"
+          firebase emulators:start &
 
 # jobs:
 #   lint-functions:
