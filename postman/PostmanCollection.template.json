@@ -21,9 +21,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:5001/auth-emulator-example/us-central1/helloWorld",
+          "raw": "http://{{host}}:5001/auth-emulator-example/us-central1/helloWorld",
           "protocol": "http",
-          "host": ["127", "0", "0", "1"],
+          "host": ["{{host}}"],
           "port": "5001",
           "path": ["auth-emulator-example", "us-central1", "helloWorld"]
         }
@@ -65,7 +65,7 @@
     },
     {
       "key": "authEmail",
-      "value": "hello@test.com",
+      "value": "test@test.com",
       "type": "default"
     },
     {
@@ -76,6 +76,11 @@
     {
       "key": "apiKey",
       "value": "replace_me_with_api_key",
+      "type": "default"
+    },
+    {
+      "key": "host",
+      "value": "localhost",
       "type": "default"
     }
   ]

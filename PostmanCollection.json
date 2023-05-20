@@ -21,13 +21,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:5001/auth-emulator-example/us-central1/helloWorld",
+          "raw": "http://{{host}}:5001/auth-emulator-example/us-central1/helloWorld",
           "protocol": "http",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{host}}"
           ],
           "port": "5001",
           "path": [
@@ -57,6 +54,7 @@
         "type": "text/javascript",
         "exec": [
           "const apiKey = pm.collectionVariables.get(\"apiKey\");",
+          "const host = pm.collectionVariables.get(\"host\");",
           "function randomProviderRawId() {",
           "    let str = \"\";",
           "    for (let i = 0; i < 40; i++) {",
@@ -76,13 +74,13 @@
           "    picture: \"\",",
           "}));",
           "const payload = JSON.stringify({",
-          "    requestUri: `http://localhost:9099/emulator/auth/handler?providerId=google.com&id_token=${claims}`,",
+          "    requestUri: `http://${host}:9099/emulator/auth/handler?providerId=google.com&id_token=${claims}`,",
           "    returnIdpCredential: true,",
           "    returnSecureToken: true,",
           "    sessionId: \"ValueNotUsedByAuthEmulator\",",
           "});",
           "const options = {",
-          "    url: `http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${apiKey}`,",
+          "    url: `http://${host}:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${apiKey}`,",
           "    method: \"POST\",",
           "    header: { \"content-type\": \"application/json\" },",
           "    body: {",
@@ -90,7 +88,7 @@
           "        raw: payload,",
           "    },",
           "};",
-          "pm.sendRequest(options, function (err, res) {",
+          "pm.sendRequest(options, (err, res) => {",
           "    if (err) {",
           "        console.error(err);",
           "        throw new Error(\"Unable to authenticate!\");",
@@ -121,7 +119,7 @@
     },
     {
       "key": "authEmail",
-      "value": "hello@test.com",
+      "value": "test@test.com",
       "type": "default"
     },
     {
@@ -132,6 +130,11 @@
     {
       "key": "apiKey",
       "value": "replace_me_with_api_key",
+      "type": "default"
+    },
+    {
+      "key": "host",
+      "value": "localhost",
       "type": "default"
     }
   ]

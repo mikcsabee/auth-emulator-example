@@ -3,6 +3,7 @@ import type {Postman} from "postman-sandbox";
 declare const pm: Postman;
 
 const apiKey = pm.collectionVariables.get("apiKey");
+const host = pm.collectionVariables.get("host");
 
 /**
  * generates a random raw id
@@ -31,14 +32,14 @@ const claims = encodeURIComponent(
 );
 
 const payload = JSON.stringify({
-  requestUri: `http://localhost:9099/emulator/auth/handler?providerId=google.com&id_token=${claims}`,
+  requestUri: `http://${host}:9099/emulator/auth/handler?providerId=google.com&id_token=${claims}`,
   returnIdpCredential: true,
   returnSecureToken: true,
   sessionId: "ValueNotUsedByAuthEmulator",
 });
 
 const options = {
-  url: `http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${apiKey}`,
+  url: `http://${host}:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${apiKey}`,
   method: "POST",
   header: {"content-type": "application/json"},
   body: {
@@ -47,7 +48,7 @@ const options = {
   },
 };
 
-pm.sendRequest(options, function(err, res) {
+pm.sendRequest(options, (err: Error, res) => {
   if (err) {
     console.error(err);
     throw new Error("Unable to authenticate!");
