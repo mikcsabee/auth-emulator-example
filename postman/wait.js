@@ -1,10 +1,14 @@
 const http = require("http");
 
+/**
+ * This method tries to fetch the Firebase Emulator configuration
+ * @return {object} Firebase Emulator configuration
+ */
 async function getConfig() {
   return new Promise((resolve, reject) => {
     http
       .get("http://localhost:4000/api/config", (res) => {
-        let data = [];
+        const data = [];
         res.on("data", (chunk) => {
           data.push(chunk);
         });
@@ -19,12 +23,20 @@ async function getConfig() {
   });
 }
 
+/**
+ * This method wraps the setTimeout method in a Promise
+ * @param {number} timeout in miliseconds
+ * @return {Promise}
+ */
 async function sleep(timeout) {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
 }
 
+/**
+ * Main entry point
+ */
 async function main() {
   let result;
   for (let i = 0; i < 30; i++) {
@@ -44,4 +56,6 @@ async function main() {
   process.exit(1);
 }
 
-main().then(() => console.log("Done"));
+main()
+  .then(() => console.log("Done"))
+  .catch((error) => console.error(error));
