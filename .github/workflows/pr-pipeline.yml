@@ -21,9 +21,9 @@ jobs:
           cache: 'npm'
           cache-dependency-path: functions/package-lock.json
       - run: |
-        cd postman
-        npm ci
-        npm run lint
+          cd postman
+          npm ci
+          npm run lint
 
   lint-postman:
     runs-on: ubuntu-latest
@@ -36,6 +36,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: postman/package-lock.json
       - run: |
-        cd postman
-        npm ci
-        npm run lint
+          cd postman
+          npm ci
+          npm run lint
