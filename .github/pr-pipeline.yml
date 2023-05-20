@@ -6,7 +6,7 @@ on:
       - "main"
   push:
     branches:
-      - feat/github-workflow
+      - 'feat/**'
 
 jobs:
   lint:
