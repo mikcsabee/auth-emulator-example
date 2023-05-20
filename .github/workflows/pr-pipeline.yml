@@ -20,6 +20,7 @@ jobs:
           node-version: 16
           cache: 'npm'
           cache-dependency-path: functions/package-lock.json
+      - run: cd functions
       - run: npm ci
       - run: npm run lint
   lint-postman:
@@ -32,5 +33,6 @@ jobs:
           node-version: 16
           cache: 'npm'
           cache-dependency-path: postman/package-lock.json
+      - run: cd postman
       - run: npm ci
       - run: npm run lint  
