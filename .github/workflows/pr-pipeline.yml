@@ -31,8 +31,9 @@ jobs:
           npm run build
       - name: Install Firebase
         run: |
-          chmod +x utils/firebase-version.sh
-          export FIREBASE_VERSION="$(./utils/firebase-version.sh)"
+          cd utils
+          chmod +x firebase-version.sh
+          export FIREBASE_VERSION="$(./firebase-version.sh)"
           npm install -g firebase-tools@$FIREBASE_VERSION
       - name: Start Firebase Emulator
         run: |
