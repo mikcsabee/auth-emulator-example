@@ -13,3 +13,7 @@ updates:
     directory: "/postman"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/utils"
+    schedule:
+      interval: "weekly"
