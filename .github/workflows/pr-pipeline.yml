@@ -6,39 +6,39 @@ on:
       - "main"
 
 jobs:
-  lint-functions:
+  test:
     runs-on: ubuntu-latest
     name: Test
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          echo "Lint Functions"
+      - name: Lint Functions
+        run: |
           cd functions
           npm ci
           npm run lint
-      - run: |
-          echo "Lint Postman"
+      - name: Lint Postman
+        run: |
           cd postman
           npm ci
           npm run lint
-      - run: |
-          echo "Build Functions"
+      - name: "Build Functions"
+        run: |
           cd functions
           npm run build
-      - run: |
-          echo "Build Postman"
+      - name: Build Postman
+        run: |
           cd postman
           npm run build
-      - run: |
-          echo "Install Firebase"
+      - name: Install Firebase
+        run: |
           npm install -g firebase-tools
-      - run: |
-          echo "Start Firebase Emulator"
+      - name: Start Firebase Emulator
+        run: |
           firebase emulators:start &
-      - run: |
-          echo "Wait for Firebase Emulator"
+      - name: Wait for Firebase Emulator
+        run: |
           node postman/wait.js
-      - run: |
-          echo "Test"
+      - name: Test
+        run: |
           cd postman
           npm run test
