@@ -5,6 +5,10 @@ on:
     branches:
       - "main"
 
+concurrency:
+  group: pr-pipeline
+  cancel-in-progress: false
+
 permissions:
   pull-requests: write
 
