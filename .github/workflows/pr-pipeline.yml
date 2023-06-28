@@ -59,6 +59,7 @@ jobs:
           npm run test
   auto-merge:
     needs: test
+    name: Auto Merge
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
