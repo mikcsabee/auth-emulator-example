@@ -57,7 +57,7 @@ jobs:
         run: |
           cd postman
           npm run test
-  dependabot:
+  auto-merge:
     needs: test
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
@@ -67,12 +67,12 @@ jobs:
         uses: dependabot/fetch-metadata@v1.1.1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Approve a PR
+      - name: Approve PR
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Enable auto-merge for Dependabot PRs
+      - name: Merge PR
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
