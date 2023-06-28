@@ -1,19 +1,19 @@
 name: Rebase All Pull Requests
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
-  rebase:
+  Rebase:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Fetch pull requests
+      - name: Rebase pull requests
         run: |
           repo=$GITHUB_REPOSITORY
           pull_requests=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/$repo/pulls?state=open" | jq -r '.[].number')
