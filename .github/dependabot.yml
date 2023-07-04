@@ -9,11 +9,17 @@ updates:
     directory: "/functions"
     schedule:
       interval: "daily"
+      time: "15:52"
+      timezone: "Europe/Copenhagen"
   - package-ecosystem: "npm"
     directory: "/postman"
     schedule:
       interval: "daily"
+      time: "15:52"
+      timezone: "Europe/Copenhagen"
   - package-ecosystem: "npm"
     directory: "/utils"
     schedule:
       interval: "daily"
+      time: "15:52"
+      timezone: "Europe/Copenhagen"
