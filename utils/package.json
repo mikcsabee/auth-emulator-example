@@ -9,6 +9,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "firebase-tools": "^12.1.0"
+    "firebase-tools": "^12.4.8"
   }
 }
