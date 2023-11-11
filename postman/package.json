@@ -12,7 +12,7 @@
   "author": "Csaba Miklos",
   "license": "MIT",
   "dependencies": {
-    "postman-sandbox": "^4.2.7"
+    "postman-sandbox": "^4.2.8"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
